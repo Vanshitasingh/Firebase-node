@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>Wizdom</title>
+</head>
+<body>
+
+ <div id="Registration" class="container">
+  <center><h1 style="color: white;">Wizdom</h1>
+    <div class="alert">Your message has been sent</div>
+    <div class="content" >
+   
+  <p class="full">  <input type="email" name="email" id="email" placeholder=" Email"></p>
+  <p class="full"> <input type="password" name="pass" id="password" placeholder=" Password"></p>
+  
+  <p style="color: #fff; text-align: left;">Don't have an account? <span><a href="index.html">Login</a></span></p>
+  <button class="full"onclick="LoginUser()">Login</button></center>
+ </div>
+
+
+ <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyCDzOk6HFI8KY8AfGonXTEA1XCJa1GIY9w",
+    authDomain: "centered-carver-291112.firebaseapp.com",
+    databaseURL: "https://centered-carver-291112-default-rtdb.firebaseio.com",
+    projectId: "centered-carver-291112",
+    storageBucket: "centered-carver-291112.appspot.com",
+    messagingSenderId: "982991043054",
+    appId: "1:982991043054:web:da284259e37078ec2bf6ff",
+    measurementId: "G-75MZ8T0V1N"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+
+  function RegisterUser() {
+   var email=document.getElementById('email').value;
+   var password=document.getElementById('password').value;
+   var company=document.getElementById('company').value;
+   var message=document.getElementById('message').value;
+   var phone=document.getElementById('phone').value;
+   var fname=document.getElementById('fname').value;
+   var lname=document.getElementById('lname').value;
+   firebase.auth().createUserWithEmailAndPassword(email,password).then(function(){
+    // alert('User Register successfully');
+    var id=firebase.auth().currentUser.uid;
+    firebase.database().ref('Users/'+id).set({
+     fname:fname,
+     lname:lname,
+     phone:phone,
+     company:company,
+     message:message,
+     
+    });
+
+    document.querySelector('.alert').style.display = 'block';
+
+  // Hide alert after 3 seconds
+  setTimeout(function(){
+    document.querySelector('.alert').style.display = 'none';
+  },3000);
+
+  document.querySelector(".content").reset();
+
+
+   }).catch(function(error){
+
+    var errorcode=error.code;
+    var errormsg=error.message;
+
+   });
+  }
+  function LoginUser(){
+   var email=document.getElementById('email').value;
+   var password=document.getElementById('password').value;
+   firebase.auth().signInWithEmailAndPassword(email,password).then(function(){
+
+
+    var id=firebase.auth().currentUser.uid;
+    window.location.replace("dash.html");
+    localStorage.setItem('id',id);
+    
+   }).catch(function(error){
+
+    var errorCode=error.code;
+    var errorMsg=error.message;
+
+   });
+  }
+</script>
+
+</body>
+</html>
