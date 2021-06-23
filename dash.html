@@ -5,37 +5,6 @@
 </head>
 <body>
  <p>Dashboard</p>
-<h1 id="fname"></h1>
-<h2 id="company"></h2>
-<h3 id="phone"></h3>
- <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyDeE3rtWftJAH09Ppq5zVLRcERyPmCSZIo",
-    authDomain: "webproject-7d49f.firebaseapp.com",
-    databaseURL: "https://webproject-7d49f.firebaseio.com",
-    projectId: "webproject-7d49f",
-    storageBucket: "",
-    messagingSenderId: "993271199296",
-    appId: "1:993271199296:web:aa9011bd28eb5e19"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
-<script type="text/javascript">
- var userId=localStorage.getItem('id');
- firebase.database().ref('Users/'+userId).once('value').then(function(snapshot){
-  var fname=(snapshot.val() && snapshot.val().fname);
-  var company=(snapshot.val() && snapshot.val().company);
-  var phone=(snapshot.val() && snapshot.val().phone);
 
-  document.getElementById('fname').innerHTML=fname;
-  document.getElementById('company').innerHTML=company;
-  document.getElementById('phone').innerHTML=phone;
- });
-
-</script>
- 
 </body>
 </html>

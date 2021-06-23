@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
+ 
+  <link rel="stylesheet" href="login.css">
   <title>Wizdom</title>
 </head>
 <body>
 
  <div id="Registration" class="container">
-  <center><h1 style="color: white;">Wizdom</h1>
-    <div class="alert">Your message has been sent</div>
+    
     <div class="content" >
-      
+      <h1 style="grid-column: 1/3;text-align: center;">Connect with us</h1>
+      <div class="alert" style="grid-column: 1/3;text-align: center;">Your message has been sent</div>
       <p>
   <input type="text" name="fname" id="fname" placeholder=" First Name">
 </p>
@@ -23,11 +21,12 @@
   <p> <input type="password" name="pass" id="password" placeholder=" Password"></p>
   <p> <input type="text" name="company" id="company" placeholder="Company Name"></p>
   <p> <input type="text" name="phone" id="phone" placeholder="Phone"></p>
-  <p class="full"> <input type="text" name="message" id="message" placeholder="How will you help market us?"></p>
-  <p style="color: #fff; text-align: left;">Have an account? <span><a href="login.html">Login</a></span></p>
+  <p class="full" > <input type="text" name="message" id="message" placeholder="How will you help market us?"></p>
+  <p style="color: #fff; text-align: left; margin-top: 20px;">Have an account? <span><a href="login.html">Login</a></span></p>
   <button class="full"onclick="RegisterUser()">Register</button></center>
  </div>
-
+</div>
+</div>
 
  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase.js"></script>
 
