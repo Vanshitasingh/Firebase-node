@@ -44,6 +44,9 @@ body{
   padding-bottom: 5px;
   width: 100%;
 }
+::placeholder{
+  color: rgb(185, 185, 185);
+}
 .log{
   width: 600px;
   height: 400px;
