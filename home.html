@@ -67,7 +67,7 @@
   // Hide alert after 3 seconds
  
    firebase.auth().createUserWithEmailAndPassword(email,password).then(function(){
-    alert('User Register successfully');
+    alert('User Registered successfully');
     var id=firebase.auth().currentUser.uid;
     firebase.database().ref('Users/'+id).set({
      fname:fname,
