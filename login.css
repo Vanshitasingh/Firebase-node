@@ -45,7 +45,7 @@ body{
   width: 100%;
 }
 .log{
-  width: 100%;
+  width: 600px;
   height: 400px;
   background-color: #080808;
   margin: 7% auto;
@@ -89,10 +89,3 @@ button{
   grid-column: 1/3;
 }
 
-@media(min-width:700px){
-  .content{
-    height: 50vh;
-    font-size: 1.3rem;
-  }
-  
-}
