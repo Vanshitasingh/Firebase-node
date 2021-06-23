@@ -6,24 +6,27 @@
   <title>Wizdom</title>
 </head>
 <body>
+  
 
  <div id="Registration" class="container">
     
     <div class="content" >
       <h1 style="grid-column: 1/3;text-align: center;">Connect with us</h1>
-      <div class="alert" style="grid-column: 1/3;text-align: center;">Your message has been sent</div>
+      <div class="full" id="info" style="color: red; text-align: center;"></div>
+     
       <p>
   <input type="text" name="fname" id="fname" placeholder=" First Name">
 </p>
 <p>
   <input type="text" name="lname" id="lname" placeholder="Last Name"></p>
   <p>  <input type="email" name="email" id="email" placeholder=" Email"></p>
-  <p> <input type="password" name="pass" id="password" placeholder=" Password"></p>
+  <p> <input type="password" name="pass" id="password" placeholder=" Password"> </p>
   <p> <input type="text" name="company" id="company" placeholder="Company Name"></p>
   <p> <input type="text" name="phone" id="phone" placeholder="Phone"></p>
   <p class="full" > <input type="text" name="message" id="message" placeholder="How will you help market us?"></p>
   <p style="color: #fff; text-align: left; margin-top: 20px;">Have an account? <span><a href="login.html">Login</a></span></p>
-  <button class="full"onclick="RegisterUser()">Register</button></center>
+  <button class="full"onclick="RegisterUser()">Register</button>
+
  </div>
 </div>
 </div>
@@ -45,7 +48,7 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-
+ 
 
   function RegisterUser() {
    var email=document.getElementById('email').value;
@@ -55,8 +58,16 @@
    var phone=document.getElementById('phone').value;
    var fname=document.getElementById('fname').value;
    var lname=document.getElementById('lname').value;
+   if(password.length < 6){
+      document.getElementById('info').innerHTML="Password must be greater than 6 characters";
+      
+    }
+
+
+  // Hide alert after 3 seconds
+ 
    firebase.auth().createUserWithEmailAndPassword(email,password).then(function(){
-    // alert('User Register successfully');
+    alert('User Register successfully');
     var id=firebase.auth().currentUser.uid;
     firebase.database().ref('Users/'+id).set({
      fname:fname,
@@ -67,14 +78,7 @@
      
     });
 
-    document.querySelector('.alert').style.display = 'block';
-
-  // Hide alert after 3 seconds
-  setTimeout(function(){
-    document.querySelector('.alert').style.display = 'none';
-  },3000);
-
-  document.querySelector(".content").reset();
+    
 
 
    }).catch(function(error){
