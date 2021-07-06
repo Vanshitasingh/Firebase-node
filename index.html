@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <input type="checkbox" id="sidebar-toggle">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3 class="brand">
+                <span>WIZDOM</span>
+            </h3> 
+            <label for="sidebar-toggle" class="ti-menu-alt"></label>
+        </div>
+        
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="">
+                        <span class="ti-home"></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="ti-face-smile"></span>
+                        <span>Team</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="ti-agenda"></span>
+                        <span>Tasks</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="ti-clipboard"></span>
+                        <span>Leaves</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="ti-folder"></span>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="ti-time"></span>
+                        <span>Timesheet</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="ti-book"></span>
+                        <span>Contacts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="ti-settings"></span>
+                        <span>Account</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="main-content">
+        
+        <header>
+            <div class="search-wrapper">
+                <span class="ti-search"></span>
+                <input type="search" placeholder="Search">
+            </div>
+            
+            <div class="social-icons">
+                <span class="ti-bell"></span>
+                <span class="ti-comment"></span>
+                <div></div>
+            </div>
+        </header>
+        
+        <main>
+            
+            <h2 class="dash-title">Dashboard</h2>
+            
+            <div class="dash-cards">
+                <div class="card-single" style="background-color: rgba(247,2,42,0.8);">
+                    <div class="card-body">
+                        <span class="ti-import" style="color: rgb(54, 69, 79);"></span>
+                        <div>
+                            <h5 style="color: rgb(38, 49, 56);">Total installs</h5>
+                            <h4 style="color: #fff;">$30,659.45</h4>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="card-single" style="background-color: #288654">
+                    <div class="card-body">
+                        <span class="ti-user" style="color: rgb(54, 69, 79);"></span>
+                        <div>
+                            <h5 style="color: rgb(38, 49, 56);">Total logins</h5>
+                            <h4 style="color: #fff;">$19,500.45</h4>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+                <div class="card-single"  style="background-color: #F4C430;">
+                    <div class="card-body">
+                        <span class="ti-money" style="color: rgb(54, 69, 79);"></span>
+                        <div>
+                            <h5 style="color: rgb(38, 49, 56);">Total purchases</h5>
+                            <h4 style="color: #fff;">$20,659</h4>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            
+            
+            
+                    
+                    <div class="summary">
+                        <div class="summary-card">
+                            <div class="summary-single">
+                                <span class="ti-link"></span>
+                                <div class="other">
+                                    <h5>Short Link</h5>
+                                    <input type="text" onkeydown="return false" id="copy">
+                                    <img src="copy.png" alt="copy"  onclick="copyText()">
+                                    <!-- <div class="popup"><h4>Copied 📋</h4></div> -->
+                                </div>
+                            </div>
+                            <div class="summary-single">
+                                <span class="ti-check-box"></span>
+                                <div>
+                                    <h5>16</h5>
+                                    <small>Description</small>
+                                </div>
+                            </div>
+                            <div class="summary-single">
+                                <span class="ti-face-smile"></span>
+                                <div>
+                                    <h5>12</h5>
+                                    <small>Gender</small>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="text-center">Copyright @Wizdom 2021</footer>
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+        
+    </div>
+
+    <script>
+        var popup = document.querySelector(".popup");
+
+        function copyText(){
+            var copy = document.getElementById("copy");
+            copy.select();
+            copy.setSelectionRange(0,9999);
+            document.execCommand('copy'); 
+            popup.classList.toggle('active');
+            
+        }
+    </script>
+    
+</body>
+</html>

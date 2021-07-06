@@ -1,111 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
- 
-  <link rel="stylesheet" href="login.css">
-  <title>Wizdom</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Wizdom</title>
 </head>
 <body>
-  
+    <section>
+        <div class="container">
+            <div class="contactInfo">
+                <div>
+                    <h2>Connect with us</h2>
+                    <ul class="info">
+                        <li>
+                            <span>
+                                <img src="img/location.png" alt="location">
+                            </span>
+                            <span>
+                                A-112 Westworld CHS Ltd,Mumbai-90
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <img src="img/mail.png" alt="mail">
+                            </span>
+                            <span>
+                                wiz@wiz.com
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <img src="img/call.png" alt="call">
+                            </span>
+                            <span>
+                                +99 9999 9999
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="sci">
+                    <li><a href=""><img src="img/1.png" alt="1"></a></li>
+                    <li><a href=""><img src="img/2.png" alt="1"></a></li>
+                    <li><a href=""><img src="img/3.png" alt="1"></a></li>
+                    <li><a href=""><img src="img/4.png" alt="1"></a></li>
+                    <li><a href=""><img src="img/5.png" alt="1"></a></li>
+                </ul>
+            </div>
+            
+                <div class="contactForm">
+                    <h2>Connect with us</h2>
 
- <div id="Registration" class="container">
+                    <div id="alert" style="color: red;"></div>
+                    
+                    <form method="POST" class="formBox">
+                        <div class="inputBox w50">
+                            <input type="text" name="fname" required>
+                            <span>First Name</span>
+                        </div>
+                        <div class="inputBox w50">
+                            <input type="text" name="lname" required>
+                            <span>Last Name</span>
+                        </div>
+                        <div class="inputBox w50">
+                            <input type="email" name="email" required>
+                            <span>Email</span>
+                        </div>
+                        <div class="inputBox w50">
+                            <input type="password" name="pass" id="password"required>
+                            <span>Password</span>
+                        </div>
+                        <div class="inputBox w50">
+                            <input type="text" name="company" required>
+                            <span>Company</span>
+                        </div>
+                        <div class="inputBox w50">
+                            <input type="text" name="phone" required>
+                            <span>Phone</span>
+                        </div>
+                        <div class="inputBox w100">
+                            <input type="text" name="message" required >
+                            <span>How will you help market us?</span>
+                        </div>
+                        <div class="inputBox w100">
+                          <h4>Already have an account? <a href="/login">Login</a></h4>
+                      </div>
+                        <div class="inputBox w100">
+                            <button type="submit" >Register</button>
+                        </div>
+                </form>
+                </div>
+            
+        </div>
+    </section>
+
     
-    <div class="content" >
-      <h1 style="grid-column: 1/3;text-align: center;">Connect with us</h1>
-      <div class="full" id="info" style="color: red; text-align: center;"></div>
-     
-      <p>
-  <input type="text" name="fname" id="fname" placeholder=" First Name">
-</p>
-<p>
-  <input type="text" name="lname" id="lname" placeholder="Last Name"></p>
-  <p>  <input type="email" name="email" id="email" placeholder=" Email"></p>
-  <p> <input type="password" name="pass" id="password" placeholder=" Password"> </p>
-  <p> <input type="text" name="company" id="company" placeholder="Company Name"></p>
-  <p> <input type="text" name="phone" id="phone" placeholder="Phone"></p>
-  <p class="full" > <input type="text" name="message" id="message" placeholder="How will you help market us?"></p>
-  <p style="color: #fff; text-align: left; margin-top: 20px;">Have an account? <span><a href="login.html">Login</a></span></p>
-  <button class="full"onclick="RegisterUser()">Register</button>
+ <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
 
- </div>
-</div>
-</div>
-
- <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase.js"></script>
-
-<script>
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  var firebaseConfig = {
-    apiKey: "AIzaSyCDzOk6HFI8KY8AfGonXTEA1XCJa1GIY9w",
-    authDomain: "centered-carver-291112.firebaseapp.com",
-    databaseURL: "https://centered-carver-291112-default-rtdb.firebaseio.com",
-    projectId: "centered-carver-291112",
-    storageBucket: "centered-carver-291112.appspot.com",
-    messagingSenderId: "982991043054",
-    appId: "1:982991043054:web:da284259e37078ec2bf6ff",
-    measurementId: "G-75MZ8T0V1N"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
- 
-
-  function RegisterUser() {
-   var email=document.getElementById('email').value;
-   var password=document.getElementById('password').value;
-   var company=document.getElementById('company').value;
-   var message=document.getElementById('message').value;
-   var phone=document.getElementById('phone').value;
-   var fname=document.getElementById('fname').value;
-   var lname=document.getElementById('lname').value;
-   if(password.length < 6){
-      document.getElementById('info').innerHTML="Password must be greater than 6 characters";
-      
-    }
-
-
-  // Hide alert after 3 seconds
- 
-   firebase.auth().createUserWithEmailAndPassword(email,password).then(function(){
-    alert('User Registered successfully');
-    var id=firebase.auth().currentUser.uid;
-    firebase.database().ref('Users/'+id).set({
-     fname:fname,
-     lname:lname,
-     phone:phone,
-     company:company,
-     message:message,
-     
-    });
-
-    
-
-
-   }).catch(function(error){
-
-    var errorcode=error.code;
-    var errormsg=error.message;
-
-   });
-  }
-  function LoginUser(){
-   var email=document.getElementById('email').value;
-   var password=document.getElementById('password').value;
-   firebase.auth().signInWithEmailAndPassword(email,password).then(function(){
-
-
-    var id=firebase.auth().currentUser.uid;
-    window.location.replace("dash.html");
-    localStorage.setItem('id',id);
-    
-   }).catch(function(error){
-
-    var errorCode=error.code;
-    var errorMsg=error.message;
-
-   });
-  }
-</script>
 
 </body>
 </html>
