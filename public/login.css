@@ -146,7 +146,6 @@ section::before{
     height: 80px;
 }
 .container .contactForm .formBox .inputBox span{
-    position: absolute;
     left: 0;
 padding: 5px 0;
 pointer-events: none;
