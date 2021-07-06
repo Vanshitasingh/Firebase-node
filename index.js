@@ -9,23 +9,15 @@ const flash = require('connect-flash');
 const db = require(__dirname + "/firebase.js")
 const secondarydb = require(__dirname + "/firebase2.js")
 
-app.set('view engine','ejs')
 
 //Using bod-parser
 app.use(bodyParser.urlencoded({extended:true}));
 //The public folder which holds the CSS
 app.use(express.static(__dirname + '/public'));
-app.use(session({
-    secret: 'secret',
-    cookie:{
-        maxAge:6000
-    },
-    resave: false,
-    saveUninitialized:false
-}));
-app.use(flash());
 
 
+
+app.set('view engine', 'ejs');
 
 app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname+'/home.html'));
