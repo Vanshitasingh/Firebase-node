@@ -1,9 +1,9 @@
 const firebase = require("firebase");
 
 const db = firebase.initializeApp({
-    apiKey: "AIzaSyBoUU7DYxpqOuAEkHgRmfxNFPILD91ybQM",
-    authDomain: "firestorenode-706c0.firebaseapp.com",
-    projectId: "firestorenode-706c0",
+    apiKey: process.env.API_KEY1,
+    authDomain: process.env.AUTH,
+    projectId: process.env.PROJECT_ID,
 });
 
 

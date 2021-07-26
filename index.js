@@ -58,11 +58,11 @@ app.post("/",(req,res)=>{
 function httpGet(url, callback){
     const body = {
         'dynamicLinkInfo': {
-            'domainUriPrefix': 'https://wizdom.page.link',
-            'link': 'https://www.wizdomapp.com/?mar=' + marketid
+            'domainUriPrefix': process.env.DOMAIN,
+            'link': process.env.LINK + marketid
         }
     }
- 
+ const API_KEY = process.env.API_KEY
    request({
             url: url,
             method: 'POST', json: true, body
@@ -78,7 +78,7 @@ function httpGet(url, callback){
         }
     });
 }
-var url="https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=AIzaSyCJa1bsCnlBQKTJerZ8XtPgr0bmSzjXZC8";
+var url=`https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${API_KEY}`;
     
 httpGet(url,(response)=>{
      var resq = response;
@@ -128,91 +128,53 @@ app.post("/login",(req,res)=>{
 
 
    app.get("/dashboard",(req,res,next)=>{
-  
-    db.auth().onAuthStateChanged((user) => {
-        
-        if (user) {
-            
-          var uid = user.uid;
-          db.firestore().collection("Users").doc(uid).get()
-          .then(async(doc)=>{
-              if(doc.exists){
-                  var shortL =doc.data().short_link
-                  var markId = doc.data().markid;
-                  
-                  //rosan's db
-                 let firstColl = secondarydb.firestore().collection("Affiliate_Marketing").doc(markId);
-                 let first = await firstColl.collection('data').doc('install').get()
-                 .then(
-                     function(doc){
-                    if(doc.exists){
-                        var install =doc.data().number
-                        return install;
-                        }else{
-                            console.log('No such document!');
-                        }
-                        
-                    })
-                .catch(function(err){
-                        console.log(err);
-                    })
-                    let secondColl= secondarydb.firestore().collection("Affiliate_Marketing").doc(markId);
-                   let second=await secondColl.collection('data').doc('login').get()
-                    .then(
-                        function (doc){
-                        if(doc.exists){
-                            var login =doc.data().number
-                            return login;
-                            }else{
-                                console.log('No such document!');
-                            }
-                    })
-                    .catch(function(err){
-                            console.log(err);
-                        })
-                    let thirdColl= secondarydb.firestore().collection("Affiliate_Marketing").doc(markId);
-                    let thirdF= thirdColl.collection('data').doc('purchases');
-                     let third=await thirdF.get()
-                        .then(function (doc){
-                            if(doc.exists){
-                                var puchases=doc.data().free_trial
-                                return puchases;
-                                }else{
-                                    console.log('No such document!');
-                                }
-                        })
-                        .catch(function(err){
-                                console.log(err);
-                            })
-                   let pur= await thirdF.collection('users').doc("hz71u4cgZA6JQ9IR6Yeo").get()
-                        .then(function(doc){
-                        if(doc.exists){
-                            var des = doc.data().skuDetails.description;
-                            var gen = doc.data().user.gender;
-                             return [des,gen];
-                              
-                            }else{
-                                console.log('No such document!');
-                            }
-
-                        })
-                    .catch(function(err){
-                            console.log(err);
-                        })
-                        res.render("dash",{shortL:shortL,first:first,second:second,third:third,des:pur[0],gen:pur[1]});  
-                  }else{
-                      console.log('No such document!');
-                  } 
-                  
-            })
-          .catch(function(err){
-                  console.log(err);
-            })
-        } else {
-          console.log("User signed out");
-        }
-        
-    });
+ 
+    async function getMarketing(markid) {
+        // refs
+        const ref = secondarydb.firestore().collection("Affiliate_Marketing").doc(markid)
+        const installRef = ref.collection('data').doc('install')
+        const loginRef = ref.collection('data').doc('login')
+        const purchasesRef = ref.collection('data').doc('purchases')
+        const skuRef = purchasesRef.collection('users').doc("hz71u4cgZA6JQ9IR6Yeo")
+        // docs
+        const docs = [
+          installRef.get(),
+          loginRef.get(),
+          purchasesRef.get(),
+          skuRef.get()
+        ]
+        // fetch
+        const [installDoc, loginDoc, purchasesDoc, skuDoc] = await Promise.all(docs)
+        // combine result
+        if (installDoc.exists && loginDoc.exists && purchasesDoc.exists && skuDoc.exists)
+          return {
+            install: installDoc.data().number,
+            login: loginDoc.data().number,
+            purchases: purchasesDoc.data().free_trial,
+            des: skuDoc.data().skuDetails.description,
+            gen: skuDoc.data().user.gender
+          }
+        else
+          throw Error(`Marketing data not found`)
+      }
+    async function getUser(uid) {
+        const doc = await db.firestore().collection("Users").doc(uid).get()
+        if (doc.exists)
+          return doc.data()
+        else
+          throw Error(`User not found`)
+      }
+      db.auth().onAuthStateChanged(user => {
+        if (!user) next(Error("Login required"))
+        getUser(user.uid)
+         .then(({ short_link, markid }) =>
+           getMarketing(markid)
+             .then(({ install, login, purchases, des, gen }) =>
+                res.render("dash",{shortL:short_link, first:install, second:login,third: purchases,des: des, gen:gen })
+             ).catch(err=>{console.log(err)})
+         ).catch(err=>{console.log(err)})
+      })       
+    
     
 })
 
