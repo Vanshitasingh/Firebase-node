@@ -1,4 +1,5 @@
 const firebase = require("firebase");
+require('dotenv').config();
 
 const secondaryAppConfig = {
     apiKey: process.env.API_KEY2,

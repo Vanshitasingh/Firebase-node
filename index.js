@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 const request = require('request');
+require('dotenv').config();
 const session  = require('express-session');
 const flash = require('connect-flash');
 

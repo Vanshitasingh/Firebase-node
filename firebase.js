@@ -1,4 +1,5 @@
 const firebase = require("firebase");
+require('dotenv').config();
 
 const db = firebase.initializeApp({
     apiKey: process.env.API_KEY1,
